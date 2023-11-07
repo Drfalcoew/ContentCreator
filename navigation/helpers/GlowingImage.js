@@ -4,10 +4,12 @@ import { Image } from 'react-native';
 import { View } from 'react-native';
 
 
+
 const GlowingImage = ({ source, style }) => (
-    <ImageBackground source={source} style={[style, styles.glowingimage]}>
-      <View style={styles.image}/>
-    </ImageBackground>
+  <View style={style}>
+    <ImageBackground source={source} style={[style, styles.glowingimage]} />
+    <Image source={source} style={styles.image} />
+  </View>
 );
 
 export default GlowingImage;

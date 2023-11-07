@@ -41,7 +41,7 @@ const SelectedPost = ({ post }) => {
                 </TouchableOpacity>
             </View>
             {comments.map((comment, index) => (
-                <View key={index} style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+                <View key={index} style={styles.selectedPostBottomView}>
                     <Text style={styles.selectedPostCommenter}>{comment.user}</Text>
                     <Text style={styles.selectedPostComments}>{comment.text}</Text>
                 </View>

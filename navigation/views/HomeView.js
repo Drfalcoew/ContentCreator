@@ -95,35 +95,58 @@ const postData = [
     },
 ];
 
+const accountData = [
+    {
+        id: 1,
+        title: "Angelina Jolie",
+        image: require("../../assets/stock_images/angelina_jolie.jpg"),
+        followers: Math.floor(Math.random() * 1000),
+        posts: Math.floor(Math.random() * 100),
+    },
+    {
+        id: 2,
+        title: "Scarlett Johansson",
+        image: require("../../assets/stock_images/scarlett_johansson.jpg"),
+        followers: Math.floor(Math.random() * 1000),
+        posts: Math.floor(Math.random() * 100),
+    },
+    {
+        id: 3,
+        title: "Robert Downey Jr.",
+        image: require("../../assets/stock_images/robert_downey_jr.jpg"),
+        followers: Math.floor(Math.random() * 1000),
+        posts: Math.floor(Math.random() * 100),
+    },
+];
 
 const HomeView = ({navigation}) => {
 
     // Default is posts
-    const [viewData, setViewData] = useState(postData); // This will alternate based on our switch between posts and accounts
-
-    const blankPost = {
-        id: 0,
-        title: '',
-        background: '',
-        likes: 0,
-        comments: []
-    }
-
-    // Default is first post
-    const [selectedPost, setSelectedPost] = useState(postData[0] || blankPost);
-
-    // Segmented control index. Default is 0 (posts)
     const [selectedIndex, setSelectedIndex] = useState(0);
-    
+    const [selectedPost, setSelectedPost] = useState(postData[0]);
+    const [viewData, setViewData] = useState(postData);
+
+    console.log("Selected index: ", selectedIndex);
+
     // This is the function that will be called when the switch is toggled
     const onChangeHandler = () => {
-        navigation.navigate('Profile');
+
+        if (selectedIndex === 0) {
+            setViewData(accountData);
+            setSelectedPost(accountData[0]);
+        } else {
+            setViewData(postData);
+            setSelectedPost(postData[0]);
+        }
     }
 
     const listComponents = [
         { title: 'Posts', data: [1], component: (<CellViews viewData={viewData} setData={setSelectedPost} />) },
-        { title: 'Accounts', data: [1], component: (<Switch selectedIndex={selectedIndex}
-            onSegmentChange={(index) => setSelectedIndex(index)}
+        { title: 'Switch', data: [1], component: (<Switch selectedIndex={selectedIndex}
+            onSegmentChange={(index) => {
+                setSelectedIndex(index);
+                onChangeHandler();
+            }}
         /> )},
         { title: 'SelectedPost', data: [1], component: (<SelectedPost post={selectedPost}/>)}
     ];
@@ -131,25 +154,25 @@ const HomeView = ({navigation}) => {
     
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <SectionList
-                contentContainerStyle={styles.mainScrollView}
-                stickySectionHeadersEnabled={false}
-                sections={listComponents}
-                renderItem={({ item, section }) => {
-                    return section.component;
-                }}
-
-                renderSectionHeader={({ section: { title } }) => (
-                    /* title is Posts or Accounts ONLY, then render header. otherwise null */
-                    title === 'Posts' ? <View style={styles.sectionHeaderContainer}>
-                        <Text style={styles.sectionHeaderText}>{
-                            selectedIndex === 0 ? 'Posts' : 'Accounts'
-                        }</Text>
-                    </View> : null
-                )}
-            />
+          <SectionList
+            contentContainerStyle={styles.mainScrollView}
+            stickySectionHeadersEnabled={false}
+            sections={listComponents}
+            renderItem={({ item, section }) => {
+              return section.component;
+            }}
+            renderSectionHeader={({ section: { title } }) => {
+              return title === 'Posts' ? (
+                <View style={styles.sectionHeaderContainer}>
+                  <Text style={styles.sectionHeaderText}>
+                    {selectedIndex === 0 ? 'Posts' : 'Accounts'}
+                  </Text>
+                </View>
+              ) : null;
+            }}
+          />
         </SafeAreaView>
-    );
-}
+      );
+    };
 
 export default HomeView;

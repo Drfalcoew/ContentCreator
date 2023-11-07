@@ -17,7 +17,11 @@ const Switch = ({ selectedIndex, onSegmentChange }) => {
             styles.segment,
             selectedIndex === index ? styles.selectedSegment : null,
           ]}
-          onPress={() => onSegmentChange(index)}
+          onPress={() => {
+            if (selectedIndex !== index) {
+              onSegmentChange(index);
+            }
+          }}
         >
         </TouchableOpacity>
       ))}

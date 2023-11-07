@@ -27,17 +27,19 @@ const styles = StyleSheet.create({
     backgroundposition: 'center',
     backgroundrepeat: 'norepeat',
     zindex: -1,
+    backgroundColor: 'transparent',
     borderradius: 'inherit',
-    filter: 'blur(10px) saturate(2)',
+    marginTop: 40,
+    filter: 'blur(30px) saturate(2)',
   },
   image: {
     width: '100%',
     height: '100%',
+    position: 'absolute',
     resizeMode: 'cover',
     zIndex: 1,
     borderRadius: 0.6,
   },
-
   // Header
     headerContainer: {
       flex: 1.0,
@@ -166,9 +168,14 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     selectedPostBottomView: {
-        flexDirection: 'column',
+        flex: 0.3,
         alignItems: 'center',
-        marginVertical: 10,
+        flexDirection: 'row',
+        marginBottom: 20,
+        borderRadius: 10,
+        width: '100%',
+        opacity: 0.85,
+        zIndex: 3
     },
     selectedPostLabels: {
         fontSize: 14,
@@ -177,18 +184,20 @@ const styles = StyleSheet.create({
         zIndex: 4,
     },
     selectedPostCommenter: {
+        marginLeft: 20,
         fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: 'medium',
         color: 'white',
         marginRight: 10,
         zIndex: 4,
     },
     selectedPostComments: {
         fontSize: 14,
-        color: 'white',
+        color: 'lightgray',
+        fontWeight: '100',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 5
+        marginBottom: 2
     },
 })
 

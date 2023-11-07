@@ -15,9 +15,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     mainScrollView: {
-        flex: 1,
         width: width - 40,
-        height: height,
+        height: height + 150,
         marginLeft: 20,
         zIndex: 0,
         marginRight: 33,
