@@ -3,10 +3,13 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
 import styles from "./SubViewStyles"
 import GlowingImage from '../helpers/GlowingImage';
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from './CommentsView';
 
 const SelectedPost = ({ post }) => {
 
-    console.log(post);
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     const [likes, setLikes] = useState(post.likes);
     const [comments, setComments] = useState(post.comments || []);
@@ -16,7 +19,7 @@ const SelectedPost = ({ post }) => {
     };
 
     const handleComment = () => {
-        setComments([...comments, { name: 'username', comment: 'comment text' }]);
+        navigation.navigate("CommentsView", { comments });
     };
 
     useEffect(() => {
@@ -31,7 +34,7 @@ const SelectedPost = ({ post }) => {
             <View style={styles.selectedPostHeaderContainer}>
                 <View style={styles.selectedPostHeader}>
                     <Image source={{ uri: post.image }} style={styles.selectedPostHeaderCircle} />
-                    <View style={{ marginLeft: 10, flexDirection: 'column' }}>
+                    <View style={{ marginLeft: 10 }}>
                         <Text style={styles.selectedPostHeaderTitle}>{post.title}</Text>
                         <Text style={styles.labelfour}>@username</Text>
                     </View>
@@ -54,14 +57,14 @@ const SelectedPost = ({ post }) => {
                         <Text style={styles.labelfour}>Comments</Text>
                     </TouchableOpacity>
                 </View>
-                <>
-                {comments.map((comment, index) => (
-                    <View key={index} style={styles.selectedPostBottomView}>
-                        <Text style={styles.selectedPostCommenter}>{comment.name}</Text>
-                        <Text style={styles.selectedPostComments}>{comment.comment}</Text>
-                    </View>
-                ))}
-                </>
+                    <>
+                    {comments.map((comment, index) => (
+                        <View key={index} style={styles.selectedPostBottomView}>
+                            <Text style={styles.selectedPostCommenter}>{comment.name}</Text>
+                            <Text style={styles.selectedPostComments}>{comment.comment}</Text>
+                        </View>
+                    ))}
+                    </>
                 </>
             ) : (
                 // If the post is an account, only render the post.posts and post.followers

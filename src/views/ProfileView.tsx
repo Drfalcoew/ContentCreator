@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../subviews/Header';
+import styles from './ViewStyles';
 
 const ProfileView = ({navigation}) => {
     return (
-        <View>
-            <Text onPress={() => navigation.navigate("Profile")}
-            >Profile View</Text>
-        </View>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.mainScrollView}>
+                <Header title={'Profile'} rightComponents={[]}/>
+            </View>
+        </SafeAreaView>
     );
 }
 

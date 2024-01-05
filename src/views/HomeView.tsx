@@ -5,8 +5,8 @@ import CellViews from '../subviews/CellViews';
 import { SectionList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Switch from '../subviews/Switch';
-
 import SelectedPost from '../subviews/SelectedPost';
+import Header from '../subviews/Header';
 
 interface postData {
     id: number,
@@ -148,12 +148,11 @@ const accountData: accountData[] = [
 
 const HomeView = ({navigation}) => {
 
+
     // Default is posts
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [selectedPost, setSelectedPost] = useState<any>(postData[0]);
     const [viewData, setViewData] = useState<any>(postData);
-
-    console.log("Selected index: ", selectedIndex);
 
     // This is the function that will be called when the switch is toggled
     const onChangeHandler = () => {
@@ -178,26 +177,21 @@ const HomeView = ({navigation}) => {
         { title: 'SelectedPost', data: [1], component: (<SelectedPost post={selectedPost}/>)}
     ];
 
-    
     return (
         <SafeAreaView style={{ flex: 1 }}>
-          <SectionList
-            contentContainerStyle={styles.mainScrollView}
-            stickySectionHeadersEnabled={false}
-            sections={listComponents}
-            renderItem={({ item, section }) => {
-              return section.component;
-            }}
-            renderSectionHeader={({ section: { title } }) => {
-              return title === 'Posts' ? (
-                <View style={styles.sectionHeaderContainer}>
-                  <Text style={styles.sectionHeaderText}>
-                    {selectedIndex === 0 ? 'Posts' : 'Accounts'}
-                  </Text>
-                </View>
-              ) : null;
-            }}
-          />
+            <SectionList
+                contentContainerStyle={styles.mainScrollView}
+                stickySectionHeadersEnabled={false}
+                sections={listComponents}
+                renderItem={({ item, section }) => {
+                return section.component;
+                }}
+                renderSectionHeader={({ section: { title } }) => {
+                return title === 'Posts' ? (
+                    <Header title={selectedIndex === 0 ? 'Posts' : 'Accounts'} rightComponents={[]}/>
+                ) : null;
+                }}
+            />
         </SafeAreaView>
       );
     };

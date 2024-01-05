@@ -4,18 +4,19 @@
 import React from "react"
 import {
     AnimatedTabBarNavigator,
-    DotSize, // optional
-    TabElementDisplayOptions, // optional
-    TabButtonLayout, // optional
-    IAppearanceOptions // optional
+    DotSize,
+    TabElementDisplayOptions,
   } from 'react-native-animated-nav-tab-bar'
 import Icon from 'react-native-vector-icons/Feather';
 import HomeView from "../views/HomeView"
 import ProfileView from "../views/ProfileView"
 import AddView from "../views/AddView"
 import globalStyles from "../../Styles";
+import CommentsView from "../subviews/CommentsView";
+import { createNativeStackNavigator} from '@react-navigation/native-stack';
 
-// ViewNames for the main container
+const Stack = createNativeStackNavigator();
+
 const homeViewName = "Home"
 const addViewName = "Add"
 const profileViewName = "Profile"
@@ -40,6 +41,13 @@ const tabViews = [
     }
 ]
 
+const screens = [
+    {
+        name: "comments",
+        component: CommentsView,
+    }
+]
+
 
 const MainContainer = () => {
     return (
@@ -52,10 +60,10 @@ const MainContainer = () => {
             activeTabBackgrounds: "#FFFFFF",
             }}
         tabBarOptions={{
-          activeTintColor: globalStyles.accentColor.backgroundColor,
-          inactiveTintColor: "rgba(27,26,29,1.0)"
+        activeTintColor: globalStyles.accentColor.backgroundColor,
+        inactiveTintColor: "rgba(27,26,29,1.0)"
         }}
-      >
+    >
             {tabViews.map((tabView) => {
                 return (
                     <Tabs.Screen
