@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     headerLeftContainer: {
+        paddingTop: 3,
         marginRight: 10,
     },
     headerText: {
