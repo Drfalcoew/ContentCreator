@@ -2,6 +2,8 @@
 import React from "react";
 import styles from "../views/ViewStyles";
 import { View, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from "@react-navigation/native";
 
 interface RightComponents {
     title: string;
@@ -11,13 +13,22 @@ interface RightComponents {
 interface HeaderProps {
     title: string;
     rightComponents?: RightComponents[];
+    backComponent?: boolean;
 }
 
 const Header = (props: HeaderProps) => {
     const { title, rightComponents } = props;
+    const navigation = useNavigation();
 
     return (
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer, {alignItems: 'center'}]}>
+            {props.backComponent &&
+                <TouchableOpacity style={styles.headerLeftContainer} onPress={() => {
+                    navigation.goBack();
+                }}>     
+                    <Icon name="arrow-left-circle" size={24} color="#fff" /> 
+                </TouchableOpacity>
+            }
             <Text style={styles.headerText}>{title}</Text>
             <View style={styles.headerRightContainer}>
                 {rightComponents && rightComponents.map((component, index) => {

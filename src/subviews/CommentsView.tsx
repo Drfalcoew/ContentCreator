@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from '../subviews/SubViewStyles'
+import viewStyles from '../views/ViewStyles';
 import Header from './Header';
 
 interface Comments {
@@ -10,21 +11,18 @@ interface Comments {
     likes: number,
 }
 
-interface CommentsViewProps {
+export interface CommentsViewProps {
     comments?: Comments[],
 }
 
-export type RootStackParamList = {
-    CommentsView: { comments: Comments[] }
-  };
 
 const CommentsView = (props: CommentsViewProps) => {
     const { comments } = props;
 
     return (
-        <SafeAreaView style={{ display: 'flex' }}>
-            <ScrollView>
-                <Header title="Comments" />
+        <View style={viewStyles.mainView}>
+            <ScrollView style={viewStyles.mainScrollView}>
+                <Header title="Comments" backComponent={true}/>
                 <View>
                     {comments && comments.map((comment, index) => {
                         return (
@@ -37,7 +35,7 @@ const CommentsView = (props: CommentsViewProps) => {
                     })}
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 };
 

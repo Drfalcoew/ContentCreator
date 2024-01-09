@@ -13,10 +13,9 @@ import ProfileView from "../views/ProfileView"
 import AddView from "../views/AddView"
 import globalStyles from "../../Styles";
 import CommentsView from "../subviews/CommentsView";
-import { createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Account } from "../subviews/AccountView";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-const Stack = createNativeStackNavigator();
 
 const homeViewName = "Home"
 const addViewName = "Add"
@@ -77,50 +76,53 @@ const accountData: Account[] = [
 ];
 
 
-const MainContainer = () => {
+const BottomTabNavigation = () => {
     const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
 
     return (
-        <Tabs.Navigator
-        appearance={{
-            floating: true,
-            tabBarBackground: "rgba(43,43,43,0.85)",
-            whenActiveShow: TabElementDisplayOptions.BOTH,
-            dotSize: DotSize.SMALL,
-            activeTabBackgrounds: "#FFFFFF",
+        <SafeAreaProvider style={globalStyles.mainContainer}>
+            <Tabs.Navigator
+            appearance={{
+                floating: true,
+                tabBarBackground: "rgba(43,43,43,0.85)",
+                whenActiveShow: TabElementDisplayOptions.BOTH,
+                dotSize: DotSize.SMALL,
+                activeTabBackgrounds: "#FFFFFF",
+                }}
+            tabBarOptions={{
+            activeTintColor: globalStyles.accentColor.backgroundColor,
+            inactiveTintColor: "rgba(27,26,29,1.0)"
             }}
-        tabBarOptions={{
-        activeTintColor: globalStyles.accentColor.backgroundColor,
-        inactiveTintColor: "rgba(27,26,29,1.0)"
-        }}
-    >
-            {tabViews.map((tabView) => {
-                return (
-                    <Tabs.Screen
-                    name={tabView.name}
-                    component={() => (
-                        <tabView.component
-                            navigation={navigator}
-                            selectedAccount={selectedAccount}
-                            handleAccountChange={setSelectedAccount}
-                            accountData={[]}
+        >
+                {tabViews.map((tabView) => {
+                    return (
+                        <Tabs.Screen
+                        name={tabView.name}
+                        component={() => (
+                            <tabView.component
+                                navigation={navigator}
+                                selectedAccount={selectedAccount}
+                                handleAccountChange={setSelectedAccount}
+                                accountData={accountData}
+                            />
+                        )}
+                        options={{
+                            tabBarIcon: ({ focused, color, size }) => (
+                            <Icon
+                                name={tabView.icon}
+                                size={30}
+                                color={focused ? "rgba(27,26,29,1.0)" : "#ffffff"}
+                                focused={focused}
+                            />
+                            ),
+                            }}
                         />
-                      )}
-                      options={{
-                        tabBarIcon: ({ focused, color, size }) => (
-                          <Icon
-                            name={tabView.icon}
-                            size={30}
-                            color={focused ? "rgba(27,26,29,1.0)" : "#ffffff"}
-                            focused={focused}
-                          />
-                        ),
-                        }}
-                    />
+                    )}
                 )}
-            )}
-        </Tabs.Navigator>
+                
+            </Tabs.Navigator>
+        </SafeAreaProvider>
     )
 }
 
-export default MainContainer;
+export default BottomTabNavigation;

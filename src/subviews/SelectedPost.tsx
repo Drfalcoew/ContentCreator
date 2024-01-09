@@ -3,13 +3,13 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
 import styles from "./SubViewStyles"
 import GlowingImage from '../helpers/GlowingImage';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from './CommentsView';
+import { RootStackParamList } from '../navigation/MainNavigator';
 
-const SelectedPost = (props: { navigation: Navigator, post }) => {
+const SelectedPost = ({ post }) => {
 
-    const { navigation, post } = props;
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     const [likes, setLikes] = useState(post.likes);
     const [comments, setComments] = useState(post.comments || []);
@@ -19,8 +19,8 @@ const SelectedPost = (props: { navigation: Navigator, post }) => {
     };
 
     const handleComment = () => {
-        navigation.navigate("CommentsView", { comments });
-    };
+        navigation.navigate('Comments', { comments: comments });
+      };
 
     useEffect(() => {
         setLikes(post.likes);

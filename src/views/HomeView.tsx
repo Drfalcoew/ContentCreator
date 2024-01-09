@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
 import styles from './ViewStyles';
 import CellViews from '../subviews/CellViews';
 import { SectionList } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Switch from '../subviews/Switch';
 import SelectedPost from '../subviews/SelectedPost';
 import Header from '../subviews/Header';
@@ -112,9 +110,9 @@ const postData: postData[] = [
 ];
 
 
-const HomeView = (props: {navigation: Navigator, accountData: Account[]}) => {
+const HomeView = (props: {accountData: Account[]}) => {
 
-    const { navigation, accountData } = props;
+    const { accountData } = props;
 
     // Default is posts
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -145,21 +143,19 @@ const HomeView = (props: {navigation: Navigator, accountData: Account[]}) => {
     ];
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <SectionList
-                contentContainerStyle={styles.mainScrollView}
-                stickySectionHeadersEnabled={false}
-                sections={listComponents}
-                renderItem={({ item, section }) => {
-                return section.component;
-                }}
-                renderSectionHeader={({ section: { title } }) => {
-                return title === 'Posts' ? (
-                    <Header title={selectedIndex === 0 ? 'Posts' : 'Accounts'} rightComponents={[]}/>
-                ) : null;
-                }}
-            />
-        </SafeAreaView>
+        <SectionList
+            contentContainerStyle={styles.mainScrollView}
+            stickySectionHeadersEnabled={false}
+            sections={listComponents}
+            renderItem={({ item, section }) => {
+            return section.component;
+            }}
+            renderSectionHeader={({ section: { title } }) => {
+            return title === 'Posts' ? (
+                <Header title={selectedIndex === 0 ? 'Posts' : 'Accounts'} rightComponents={[]}/>
+            ) : null;
+            }}
+        />
       );
     };
 

@@ -29,18 +29,6 @@ const globalStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    floatingIcon: {
-        position: 'absolute',
-        bottom: '7.5%', // Adjust the top position as needed
-        left: '50%',
-        marginLeft: -29, // Half of the icon's width
-        width: 60, // Adjust as needed
-        height: 60, // Adjust as needed
-        backgroundColor: '#FFF', // Background color matches the view's background
-        borderRadius: 30, // Make it a circle
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     selectedTabCircle: {
         width: 45, // Adjust the size of the circle as needed
         height: 45, // Adjust the size of the circle as needed

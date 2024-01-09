@@ -8,7 +8,6 @@ import Header from '../subviews/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import viewStyles from './ViewStyles';
 import AccountView from '../subviews/AccountView';
-import CustomModal from '../subviews/CustomModal';
 import { Account } from '../subviews/AccountView';
 
 

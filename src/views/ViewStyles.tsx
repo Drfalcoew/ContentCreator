@@ -10,12 +10,20 @@ const styles = StyleSheet.create({
         width: width,
         alignItems: 'flex-start',
         flexDirection: 'row',
-
+    },
+    headerLeftContainer: {
+        marginRight: 10,
     },
     headerText: {
         fontSize: 20,
         color: '#FFF',
         fontWeight: 'bold',
+        marginRight: 10,
+    },
+    headerBackText: {
+        fontSize: 18,
+        color: '#FFF',
+        fontWeight: '400',
         marginRight: 10,
     },
     headerRightContainer: {
@@ -33,6 +41,7 @@ const styles = StyleSheet.create({
         zIndex: 0,
         marginRight: 33,
         flexDirection: 'column',
+        backgroundColor: 'rgba(27,26,29,1.0)',
     },
     mainView: {
         display: 'flex',
