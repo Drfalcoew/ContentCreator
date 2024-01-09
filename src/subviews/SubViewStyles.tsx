@@ -57,12 +57,9 @@ const styles = StyleSheet.create({
   },
     // AddPost View
     addPostContainer: {
-      flex: 1,
-      height: '100%',
-      maxHeight: height * 0.25,
       paddingRight: 20,
       width: width,
-      marginBottom: 25,
+      marginBottom: 0,
       flexDirection: 'row',
       overflow: 'hidden',
       zIndex: 2,
@@ -153,8 +150,6 @@ const styles = StyleSheet.create({
     },
     // Account View
     accountViewContainer: {
-        flex: 0.3,
-        minHeight: height * 0.05,
         paddingRight: 20,
         width: width,
         marginBottom: 10,
@@ -169,10 +164,22 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     accountViewUsername: {
-        fontSize: 16,
+        fontSize: 18,
         color: '#FFF',
         fontWeight: 'normal',
         marginBottom: 2,
+    },
+    nullAccountText: {
+      fontSize: 15,
+      color: '#FFF',
+      fontWeight: 'normal',
+      marginBottom: 2,
+    },
+    signInAccountText: {
+      fontSize: 15,
+      color: globalStyles.accentColor.backgroundColor,
+      fontWeight: 'normal',
+      marginBottom: 2,
     },
     accountViewButton: {
       fontSize: 14,
@@ -182,12 +189,14 @@ const styles = StyleSheet.create({
     // CellViews
     postContainer: {
         flex: 1,
-        minHeight: height * 0.25,
+        minHeight: 185,
+        maxHeight: 190,
+        height: '100%',
         width: width,
         paddingTop: 10,
         marginBottom: 25,
         flexDirection: 'row',
-        overflow: 'visible',
+        overflow: 'hidden',
         zIndex: 2,
     },
     postView: {

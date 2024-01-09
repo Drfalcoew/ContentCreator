@@ -1,7 +1,7 @@
 
 
 // Views for the main container
-import React from "react"
+import React, { useState } from "react"
 import {
     AnimatedTabBarNavigator,
     DotSize,
@@ -14,6 +14,7 @@ import AddView from "../views/AddView"
 import globalStyles from "../../Styles";
 import CommentsView from "../subviews/CommentsView";
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import { Account } from "../subviews/AccountView";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,8 +49,37 @@ const screens = [
     }
 ]
 
+const accountData: Account[] = [
+    {
+        id: 1,
+        type: "account",
+        name: "Angelina Jolie",
+        image: require("../../assets/stock_images/angelina_jolie.jpg"),
+        followers: Math.floor(Math.random() * 1000),
+        posts: Math.floor(Math.random() * 100),
+    },
+    {
+        id: 2,
+        type: "account",
+        name: "Scarlett Johansson",
+        image: require("../../assets/stock_images/scarlett_johansson.jpg"),
+        followers: Math.floor(Math.random() * 1000),
+        posts: Math.floor(Math.random() * 100),
+    },
+    {
+        id: 3,
+        type: "account",
+        name: "Robert Downey Jr.",
+        image: require("../../assets/stock_images/robert_downey_jr.jpg"),
+        followers: Math.floor(Math.random() * 1000),
+        posts: Math.floor(Math.random() * 100),
+    },
+];
+
 
 const MainContainer = () => {
+    const [selectedAccount, setSelectedAccount] = useState<Account | null>(null);
+
     return (
         <Tabs.Navigator
         appearance={{
@@ -68,14 +98,25 @@ const MainContainer = () => {
                 return (
                     <Tabs.Screen
                     name={tabView.name}
-                    component={tabView.component}
-                    options={{
+                    component={() => (
+                        <tabView.component
+                            navigation={navigator}
+                            selectedAccount={selectedAccount}
+                            handleAccountChange={setSelectedAccount}
+                            accountData={[]}
+                        />
+                      )}
+                      options={{
                         tabBarIcon: ({ focused, color, size }) => (
-                        <Icon name={tabView.icon} size={30} color={focused ? "rgba(27,26,29,1.0)" : "#ffffff"} focused={focused} />
+                          <Icon
+                            name={tabView.icon}
+                            size={30}
+                            color={focused ? "rgba(27,26,29,1.0)" : "#ffffff"}
+                            focused={focused}
+                          />
                         ),
-                    }}
+                        }}
                     />
-                
                 )}
             )}
         </Tabs.Navigator>

@@ -7,9 +7,9 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from './CommentsView';
 
-const SelectedPost = ({ post }) => {
+const SelectedPost = (props: { navigation: Navigator, post }) => {
 
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const { navigation, post } = props;
 
     const [likes, setLikes] = useState(post.likes);
     const [comments, setComments] = useState(post.comments || []);
@@ -35,7 +35,7 @@ const SelectedPost = ({ post }) => {
                 <View style={styles.selectedPostHeader}>
                     <Image source={{ uri: post.image }} style={styles.selectedPostHeaderCircle} />
                     <View style={{ marginLeft: 10 }}>
-                        <Text style={styles.selectedPostHeaderTitle}>{post.title}</Text>
+                        <Text style={styles.selectedPostHeaderTitle}>{post.name}</Text>
                         <Text style={styles.labelfour}>@username</Text>
                     </View>
                 </View>

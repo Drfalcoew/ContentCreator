@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState, ChangeEvent } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { TextInputChangeEventData, NativeSyntheticEvent } from 'react-native';
 import { ImageBackground, TouchableOpacity, TextInput} from 'react-native';
 import styles from "../subviews/SubViewStyles";
 import Icon from 'react-native-vector-icons/Feather';
@@ -9,6 +8,8 @@ import Header from '../subviews/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import viewStyles from './ViewStyles';
 import AccountView from '../subviews/AccountView';
+import CustomModal from '../subviews/CustomModal';
+import { Account } from '../subviews/AccountView';
 
 
 interface NewPostData {
@@ -54,11 +55,11 @@ const postData: NewPostData[] = [
     },     
 ];
 
-const AddView = ({navigation}) => {
+const AddView = (props: {navigation: any, selectedAccount: Account | null, handleAccountChange}) => {
 
+    const { selectedAccount, handleAccountChange } = props;
     const [newPosts, setNewPosts] = useState<NewPostData[]>( postData );
     const [selectedId, setSelectedId] = useState<number | null>(0);
-
     
     const handleTitleChange = (title: string) => {
         if (selectedId !== null) {
@@ -179,7 +180,7 @@ const AddView = ({navigation}) => {
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView style={[viewStyles.mainScrollView, {overflow: 'visible'}]}>
                     <Header title={"Schedule New Post"} rightComponents={[{ title: "Upload", action: handleAddPosts }]} />
-                    <AccountView key={0} image={require("../../assets/stock_images/image_1.jpg")} username={"@Drfalcoew"} accounts={[]}/> 
+                    <AccountView key={0} selectedAccount={selectedAccount} accounts={[]} onAccountChange={handleAccountChange}/> 
                     <View style={styles.addPostContainer}>
                         <TouchableOpacity style={styles.addPostView} >
                         <input
