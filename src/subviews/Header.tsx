@@ -21,7 +21,7 @@ const Header = (props: HeaderProps) => {
     const navigation = useNavigation();
 
     return (
-        <View style={[styles.headerContainer, {alignItems: 'center'}]}>
+        <View style={[styles.headerContainer, { alignItems: 'center' }]}>
             {props.backComponent &&
                 <TouchableOpacity style={styles.headerLeftContainer} onPress={() => {
                     navigation.goBack();
@@ -35,7 +35,7 @@ const Header = (props: HeaderProps) => {
                     return (
                         <TouchableOpacity key={index} onPress={component.action}>
                             <View key={index} style={{marginRight: 10}}>
-                                <Text style={[styles.headerText, {fontWeight: '400',}]} onPress={component.action}>{component.title}</Text>
+                                <Text style={[styles.headerText, {fontWeight: '400', textAlign: 'right', marginRight: 0 }]} onPress={component.action}>{component.title}</Text>
                             </View>
                         </TouchableOpacity>
                     )

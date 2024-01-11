@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import styles from './ViewStyles';
 import CellViews from '../subviews/CellViews';
-import { SectionList } from 'react-native';
+import { SectionList, View } from 'react-native';
 import Switch from '../subviews/Switch';
 import SelectedPost from '../subviews/SelectedPost';
 import Header from '../subviews/Header';
 import { Account } from '../subviews/AccountView';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../navigation/MainNavigator';
 
 interface postData {
     id: number,
@@ -109,10 +112,10 @@ const postData: postData[] = [
     },
 ];
 
-
 const HomeView = (props: {accountData: Account[]}) => {
 
     const { accountData } = props;
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     // Default is posts
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -152,7 +155,8 @@ const HomeView = (props: {accountData: Account[]}) => {
             }}
             renderSectionHeader={({ section: { title } }) => {
             return title === 'Posts' ? (
-                <Header title={selectedIndex === 0 ? 'Posts' : 'Accounts'} rightComponents={[]}/>
+                <Header title={selectedIndex === 0 ? 'Posts' : 'Accounts'} rightComponents={selectedIndex == 1 ? [({title: "Add Account", 
+                    action: () => { navigation.navigate('Login', { backComponent: true })  }})] : undefined}/>
             ) : null;
             }}
         />
